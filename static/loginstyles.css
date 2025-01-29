@@ -1,0 +1,200 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    transition: background-color 0.5s ease;
+    position: relative; /* Necesario para poner el fondo relacionado con trading */
+    background-image: url('C:/Users/harol/Downloads/web_login_project/static/fondodelogin.png'); /* Ruta de la imagen */
+    background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+/* Fondo sutil relacionado con el trading */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/diagonal-stripes.png'), linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+    z-index: -1; /* Asegura que el fondo quede detrás de los elementos */
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;  /* Fuente futurista */
+    font-size: 3rem;  /* Tamaño de fuente */
+    font-weight: bold;
+    color: white;  /* Color base del texto */
+    text-shadow: 
+        0 0 5px rgba(255, 215, 0, 0.7),  /* Sombra dorada suave */
+        0 0 10px rgba(255, 215, 0, 0.5), 
+        0 0 15px rgba(255, 215, 0, 0.4); /* Efecto de resplandor dorado */
+    -webkit-text-stroke: 1px rgba(255, 140, 0, 1); /* Borde dorado-anaranjado */
+    margin-bottom: 20px;
+    z-index: 4;
+}
+
+
+/* Contenedor principal */
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    font-size: 3rem; /* Aumenté el tamaño del título */
+    font-weight: bold;
+    color: gold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6); /* Hice el texto más brillante */
+    margin-bottom: 40px; /* Añadí más espacio debajo del título */
+    z-index: 4;
+}
+
+/* Formulario de login */
+.login-form {
+    position: relative;
+    z-index: 3;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 30px; /* Mayor espacio entre campos */
+    
+}
+
+.input-container input {
+    width: 350px; /* Hice las casillas más anchas */
+    padding: 15px; /* Aumenté el tamaño de padding para que se vean más grandes */
+    border: none;
+    border-radius: 10px; /* Esquinas más redondeadas */
+    font-size: 1.2rem; /* Aumenté el tamaño de la fuente */
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo más brillante y visible */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.input-container input:focus {
+    background-color: rgba(255, 255, 255, 0.4); /* Fondo más claro cuando se hace foco */
+}
+
+/* Botón de inicio de sesión */
+.btn {
+    background-color: rgba(255, 215, 0, 0.9); /* Color más brillante para el botón */
+    color: black;
+    border: none;
+    padding: 15px 25px; /* Hice el botón más grande */
+    border-radius: 10px;
+    cursor: pointer; /* Cambia el cursor a mano */
+    font-size: 1.2rem; /* Aumenté el tamaño del texto */
+    transition: all 0.3s;
+    position: relative;
+    z-index: 10;
+}
+
+.btn:hover {
+    background-color: rgba(255, 165, 0, 0.9); /* Más brillante en hover */
+}
+
+/* Fondo cubriendo toda la pantalla */
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+/* Animaciones para el error */
+.error-message {
+    color: red;
+    font-weight: bold;
+    display: none;
+    margin-top: 10px;
+    animation: shake 0.5s ease;
+}
+
+/* Animación de sacudida del error */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Media Queries para la versión de PC */
+@media (min-width: 768px) {
+    .input-container input {
+        width: 450px; /* Hice las casillas más grandes en PC */
+    }
+
+    .green-bg, .red-bg {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+
+    .red-bg {
+        top: auto;
+        bottom: 0;
+    }
+}
+
+
+/* Fondo verde suave para usuario */
+.green-bg {
+    background: linear-gradient(to bottom, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0));
+    top: 0;
+    height: 100%;
+}
+
+/* Fondo rojo suave para contraseña */
+.red-bg {
+    background: linear-gradient(to top, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0));
+    bottom: 0;
+    height: 100%;
+}
+
+/* Mostrar fondo verde al hacer foco en el campo de usuario */
+.input-container input:focus ~ .green-bg {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+/* Mostrar fondo rojo al hacer foco en el campo de contraseña */
+.input-container input:focus ~ .red-bg {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+/* Animación de color de fondo completo */
+input:focus {
+    background-color: transparent;
+}

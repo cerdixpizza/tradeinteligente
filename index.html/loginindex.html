@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRADE INTELIGENTE</title>
+    <link rel="stylesheet" href="C:/Users/harol/Downloads/web_login_project/static/loginstyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">TRADE INTELIGENTE</h1>
+        <form id="loginForm" class="login-form">
+            <div class="input-container">
+                <input type="text" id="username" name="username" placeholder="Usuario" required>
+                <div class="background green-bg"></div>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                <div class="background red-bg"></div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div id="error-message" class="error-message">Usuario o contraseña incorrectos</div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('error-message');
+        const body = document.body;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('http://127.0.0.1:5000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                window.location.href = "C:/Users/harol/OneDrive/Desktop/CLASES%20TRADE%20BASICO/PAGINA%20WEB%20TRADE/templates/index.html"; // Redirige a tu página web
+            } else {
+                const result = await response.json();
+                alert(result.message);
+                errorMessage.style.display = 'block';
+                body.classList.add('invalid');
+                setTimeout(() => {
+                    body.classList.remove('invalid');
+                    errorMessage.style.display = 'none';
+                }, 2000); // Oculta el mensaje después de 2 segundos
+            }
+        });
+    </script>
+</body>
+</html>
